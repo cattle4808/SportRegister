@@ -34,11 +34,8 @@ SECRET_KEY = env.str("SECRET_KEY")
 DEBUG = env.bool("DEBUG")
 
 ALLOWED_HOSTS = [
-    "0.0.0.0", 
     "127.0.0.1", 
     "localhost", 
-    "192.168.1.107", 
-    "94.158.50.207", 
     "sportregister.onrender.com"
 ]
 
