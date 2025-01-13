@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+  <meta charset="UTF-8">
+  <title>Bosh sahifa</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  {% load static %}
+  <link rel="stylesheet" href="{% static 'frontend/css/styles.css' %}">
+</head>
+<body>
+  <div class="container">
+    {% if has_session %}
+      <h1>Rahmat, ma'lumotlaringiz saqlandi!</h1>
+      <p>Siz allaqachon ro'yxatdan o'tgansiz. Ma'lumotlarni o'zgartirish uchun ro'yxatdan o'tish shakliga o'tishingiz mumkin.</p>
+      <a href="{% url 'frontend:create_student' %}" class="toggle-button">Ro'yxat ma'lumotlarini tahrirlash</a>
+    {% else %}
+      <h1>Xush kelibsiz!</h1>
+      <a href="{% url 'frontend:create_student' %}" class="toggle-button">Talabani ro'yxatdan o'tkazish</a>
+      <a href="{% url 'frontend:regular_person' %}" class="toggle-button">Oddiy foydalanuvchini ro'yxatdan o'tkazish</a>
+    {% endif %}
+  </div>
+</body>
+</html>

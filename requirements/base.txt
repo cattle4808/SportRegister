@@ -1,0 +1,10 @@
+Django
+django-cors-headers
+django-filter
+django-jazzmin
+djangorestframework
+djangorestframework-simplejwt
+drf-yasg
+psycopg2-binary
+python-environ
+whitenoise

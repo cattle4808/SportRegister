@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+  <meta charset="UTF-8">
+  <title>Oddiy foydalanuvchini ro'yxatdan o'tkazish</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  {% load static %}
+  <link rel="stylesheet" href="{% static 'frontend/css/styles.css' %}">
+  <!-- CSS intl-tel-input -->
+  <link 
+    rel="stylesheet" 
+    href="https://cdn.jsdelivr.net/npm/intl-tel-input@17.0.19/build/css/intlTelInput.css"
+  >
+</head>
+<body>
+  <div class="container">
+    <div id="message" class="message"></div>
+
+    <div class="form-container">
+      <form id="user-form" class="form" enctype="multipart/form-data">
+        {% csrf_token %}
+        <h2>Oddiy foydalanuvchini ro'yxatdan o'tkazish</h2>
+
+        <div class="input-group">
+          <label for="name1_user">Ism (kamida 3 belgi):</label>
+          <input 
+            type="text" 
+            id="name1_user" 
+            name="name1" 
+            placeholder="Ism" 
+            required
+          >
+          <span class="error-message"></span>
+        </div>
+
+        <div class="input-group">
+          <label for="name2_user">Familya (kamida 3 belgi):</label>
+          <input 
+            type="text" 
+            id="name2_user" 
+            name="name2" 
+            placeholder="Familya" 
+            required
+          >
+          <span class="error-message"></span>
+        </div>
+
+        <div class="input-group">
+          <label for="name3_user">Otasining ismi (ixtiyoriy):</label>
+          <input 
+            type="text" 
+            id="name3_user" 
+            name="name3" 
+            placeholder="Otasining ismi" 
+          >
+          <span class="error-message"></span>
+        </div>
+
+        <div class="input-group">
+          <label for="age_user">Tug'ilgan sana:</label>
+          <input 
+            type="date" 
+            id="age_user" 
+            name="age" 
+            required
+          >
+          <span class="error-message"></span>
+        </div>
+
+        <fieldset>
+          <legend>Sport turlari:</legend>
+          <div class="input-group" id="sports-container-user">
+            {% for sport in sports %}
+              <div class="checkbox-item">
+                <input 
+                  type="checkbox" 
+                  id="sport_user_{{ sport.id }}" 
+                  name="sports" 
+                  value="{{ sport.id }}"
+                >
+                <label for="sport_user_{{ sport.id }}">{{ sport.name }}</label>
+              </div>
+            {% endfor %}
+          </div>
+          <span class="error-message"></span>
+        </fieldset>
+
+        <!-- Поле для телефона с intl-tel-input -->
+        <div class="input-group">
+          <label for="phone_user">Telefon raqam:</label>
+          <input 
+            type="tel" 
+            id="phone_user" 
+            name="phone" 
+            placeholder="Telefon raqamingiz" 
+            required
+          >
+          <span class="error-message"></span>
+        </div>
+
+        <div class="input-group">
+          <label for="telegram_user">Telegram:</label>
+          <input 
+            type="text" 
+            id="telegram_user" 
+            name="telegram" 
+            placeholder="@username" 
+            required
+          >
+          <span class="error-message"></span>
+        </div>
+
+        <div class="input-group">
+          <label for="home_user">Yashash manzili:</label>
+          <input 
+            type="text" 
+            id="home_user" 
+            name="home" 
+            placeholder="Manzilingiz" 
+            required
+          >
+          <span class="error-message"></span>
+        </div>
+
+        <div class="input-group">
+          <label for="photo_user">Rasm (ixtiyoriy):</label>
+          <input 
+            type="file" 
+            id="photo_user" 
+            name="photo" 
+            accept="image/*"
+          >
+          <span class="error-message"></span>
+        </div>
+        <img 
+          id="photo_preview_user" 
+          src="" 
+          alt="Rasm"
+          style="display:none; width:200px; height:200px; object-fit:cover; border:1px solid #ccc; margin-top:10px;"
+        >
+
+        <button type="submit">Yuborish</button>
+      </form>
+    </div>
+
+    <a href="{% url 'frontend:create_student' %}" class="toggle-button">Talaba shakli</a>
+  </div>
+
+  <!-- JS библиотеки intl-tel-input -->
+  <script 
+    src="https://cdn.jsdelivr.net/npm/intl-tel-input@17.0.19/build/js/intlTelInput.min.js">
+  </script>
+
+  <!-- Ваш app.js -->
+  <script src="{% static 'frontend/js/app.js' %}"></script>
+</body>
+</html>
