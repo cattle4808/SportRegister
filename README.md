@@ -1,13 +1,12 @@
-```markdown
+
 # Deploy SportRegulate for Production
 
 ## Steps to Deploy
 
 1. **Clone the Repository**  
-   Replace `<repository-url>` with your Git repository URL.
    ```bash
-   git clone https://github.com/username/SportRegulate.git
-   cd SportRegulate
+   git clone https://github.com/cattle4808/SportRegister.git
+   cd SportRegister
    ```
 
 2. **Set Up a Virtual Environment**  
