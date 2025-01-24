@@ -6,7 +6,6 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   {% load static %}
   <link rel="stylesheet" href="{% static 'frontend/css/styles.css' %}">
-  <!-- CSS intl-tel-input -->
   <link 
     rel="stylesheet" 
     href="https://cdn.jsdelivr.net/npm/intl-tel-input@17.0.19/build/css/intlTelInput.css"
@@ -85,7 +84,6 @@
           <span class="error-message"></span>
         </fieldset>
 
-        <!-- Поле для телефона с intl-tel-input -->
         <div class="input-group">
           <label for="phone_user">Telefon raqam:</label>
           <input 
@@ -146,12 +144,10 @@
     <a href="{% url 'frontend:create_student' %}" class="toggle-button">Talaba shakli</a>
   </div>
 
-  <!-- JS библиотеки intl-tel-input -->
   <script 
     src="https://cdn.jsdelivr.net/npm/intl-tel-input@17.0.19/build/js/intlTelInput.min.js">
   </script>
 
-  <!-- Ваш app.js -->
   <script src="{% static 'frontend/js/app.js' %}"></script>
 </body>
 </html>
