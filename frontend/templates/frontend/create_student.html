@@ -6,7 +6,6 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   {% load static %}
   <link rel="stylesheet" href="{% static 'frontend/css/styles.css' %}">
-  <!-- Подключаем CSS intl-tel-input -->
   <link 
     rel="stylesheet" 
     href="https://cdn.jsdelivr.net/npm/intl-tel-input@17.0.19/build/css/intlTelInput.css"
@@ -80,7 +79,6 @@
           <span class="error-message"></span>
         </fieldset>
 
-        <!-- Вместо обычного input для телефона — тоже type="tel", но будем применять intl-tel-input -->
         <div class="input-group">
           <label for="phone_student">Telefon raqam:</label>
           <input 
@@ -151,12 +149,10 @@
     <a href="{% url 'frontend:regular_person' %}" class="toggle-button">Oddiy foydalanuvchi shakli</a>
   </div>
 
-  <!-- JS библиотеки intl-tel-input -->
   <script 
     src="https://cdn.jsdelivr.net/npm/intl-tel-input@17.0.19/build/js/intlTelInput.min.js">
   </script>
 
-  <!-- Ваш app.js -->
   <script src="{% static 'frontend/js/app.js' %}"></script>
 </body>
 </html>
