@@ -6,12 +6,44 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   {% load static %}
   <link rel="stylesheet" href="{% static 'frontend/css/styles.css' %}">
-  <link 
-    rel="stylesheet" 
+  <link
+    rel="stylesheet"
     href="https://cdn.jsdelivr.net/npm/intl-tel-input@17.0.19/build/css/intlTelInput.css"
   >
 </head>
 <body>
+<!--<link href="https://fonts.googleapis.com/css2?family=Merriweather&display=swap" rel="stylesheet">-->
+
+<div class="logo-container" id="logoContainer">
+  <img src="https://i.imgur.com/EK6tzlA.png" alt="Логотип Toshkent tibbiyot akademiyasi">
+  <div class="logo-text">
+    <span class="logo-text1">Toshkent tibbiyot akademiyasi</span>
+    <span class="logo-text2">"Shifokor" sport klubi</span>
+  </div>
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      const logoContainer = document.getElementById('logoContainer');
+      const fadeStart = 25; // Начало эффекта (в пикселях)
+      const fadeUntil = 75; // Конец эффекта (в пикселях)
+
+      window.addEventListener('scroll', function() {
+        const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+
+        if (scrollTop > fadeStart) {
+          let opacity = 1 - (scrollTop - fadeStart) / (fadeUntil - fadeStart);
+          if (opacity < 0) opacity = 0;
+          logoContainer.style.opacity = opacity;
+
+          logoContainer.style.transform = `translateY(-${20 * (1 - opacity)}px)`;
+        } else {
+          logoContainer.style.opacity = 1;
+          logoContainer.style.transform = 'translateY(0)';
+        }
+      });
+    });
+  </script>
+</div>
+
   <div class="container">
     <div id="message" class="message"></div>
 
@@ -22,11 +54,11 @@
 
         <div class="input-group">
           <label for="name1_user">Ism (kamida 3 belgi):</label>
-          <input 
-            type="text" 
-            id="name1_user" 
-            name="name1" 
-            placeholder="Ism" 
+          <input
+            type="text"
+            id="name1_user"
+            name="name1"
+            placeholder="Ism"
             required
           >
           <span class="error-message"></span>
@@ -34,11 +66,11 @@
 
         <div class="input-group">
           <label for="name2_user">Familya (kamida 3 belgi):</label>
-          <input 
-            type="text" 
-            id="name2_user" 
-            name="name2" 
-            placeholder="Familya" 
+          <input
+            type="text"
+            id="name2_user"
+            name="name2"
+            placeholder="Familya"
             required
           >
           <span class="error-message"></span>
@@ -46,21 +78,21 @@
 
         <div class="input-group">
           <label for="name3_user">Otasining ismi (ixtiyoriy):</label>
-          <input 
-            type="text" 
-            id="name3_user" 
-            name="name3" 
-            placeholder="Otasining ismi" 
+          <input
+            type="text"
+            id="name3_user"
+            name="name3"
+            placeholder="Otasining ismi"
           >
           <span class="error-message"></span>
         </div>
 
         <div class="input-group">
           <label for="age_user">Tug'ilgan sana:</label>
-          <input 
-            type="date" 
-            id="age_user" 
-            name="age" 
+          <input
+            type="date"
+            id="age_user"
+            name="age"
             required
           >
           <span class="error-message"></span>
@@ -71,10 +103,10 @@
           <div class="input-group" id="sports-container-user">
             {% for sport in sports %}
               <div class="checkbox-item">
-                <input 
-                  type="checkbox" 
-                  id="sport_user_{{ sport.id }}" 
-                  name="sports" 
+                <input
+                  type="checkbox"
+                  id="sport_user_{{ sport.id }}"
+                  name="sports"
                   value="{{ sport.id }}"
                 >
                 <label for="sport_user_{{ sport.id }}">{{ sport.name }}</label>
@@ -86,11 +118,11 @@
 
         <div class="input-group">
           <label for="phone_user">Telefon raqam:</label>
-          <input 
-            type="tel" 
-            id="phone_user" 
-            name="phone" 
-            placeholder="Telefon raqamingiz" 
+          <input
+            type="tel"
+            id="phone_user"
+            name="phone"
+            placeholder="Telefon raqamingiz"
             required
           >
           <span class="error-message"></span>
@@ -98,11 +130,11 @@
 
         <div class="input-group">
           <label for="telegram_user">Telegram:</label>
-          <input 
-            type="text" 
-            id="telegram_user" 
-            name="telegram" 
-            placeholder="@username" 
+          <input
+            type="text"
+            id="telegram_user"
+            name="telegram"
+            placeholder="@username"
             required
           >
           <span class="error-message"></span>
@@ -110,11 +142,11 @@
 
         <div class="input-group">
           <label for="home_user">Yashash manzili:</label>
-          <input 
-            type="text" 
-            id="home_user" 
-            name="home" 
-            placeholder="Manzilingiz" 
+          <input
+            type="text"
+            id="home_user"
+            name="home"
+            placeholder="Manzilingiz"
             required
           >
           <span class="error-message"></span>
@@ -122,17 +154,17 @@
 
         <div class="input-group">
           <label for="photo_user">Rasm (ixtiyoriy):</label>
-          <input 
-            type="file" 
-            id="photo_user" 
-            name="photo" 
+          <input
+            type="file"
+            id="photo_user"
+            name="photo"
             accept="image/*"
           >
           <span class="error-message"></span>
         </div>
-        <img 
-          id="photo_preview_user" 
-          src="" 
+        <img
+          id="photo_preview_user"
+          src=""
           alt="Rasm"
           style="display:none; width:200px; height:200px; object-fit:cover; border:1px solid #ccc; margin-top:10px;"
         >
@@ -144,7 +176,7 @@
     <a href="{% url 'frontend:create_student' %}" class="toggle-button">Talaba shakli</a>
   </div>
 
-  <script 
+  <script
     src="https://cdn.jsdelivr.net/npm/intl-tel-input@17.0.19/build/js/intlTelInput.min.js">
   </script>
 

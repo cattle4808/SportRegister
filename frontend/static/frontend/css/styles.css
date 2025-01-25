@@ -1,14 +1,14 @@
-/* frontend/static/frontend/css/styles.css */
-
 body {
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   background-color: #f0f2f5;
   display: flex;
+  flex-direction: column;
   min-height: 100vh;
-  justify-content: center;
+  justify-content: flex-start;
   align-items: center;
   margin: 0;
   padding: 20px;
+  box-sizing: border-box;
 }
 
 .container {
@@ -19,6 +19,7 @@ body {
   width: 100%;
   max-width: 500px;
   box-sizing: border-box;
+  margin-top: calc(10px + 150px);
 }
 
 .message {
@@ -111,11 +112,11 @@ body {
   font-weight: 400;
 }
 
-/* Адаптивные стили */
 @media (max-width: 600px) {
   .container {
     padding: 20px;
     max-width: 100%;
+    margin-top: 120px;
   }
 
   .form input,
@@ -134,6 +135,7 @@ body {
     font-size: 14px;
   }
 }
+
 .input-group {
   display: flex;
   flex-direction: column;
@@ -150,3 +152,94 @@ body {
   border-color: #dc3545 !important;
   box-shadow: 0 0 5px rgba(220, 53, 69, 0.5);
 }
+
+:root {
+  --logo-text-color1: #333;
+  --logo-text-color2: #666;
+  --logo-padding: 10px;
+  --logo-transition-speed: 0.5s;
+  --logo-text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
+  --logo-border-color: rgba(0, 0, 0, 0.2);
+}
+
+.logo-container {
+  position: fixed;
+  top: 10px;
+  left: 10px;
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  padding: var(--logo-padding);
+  transition: opacity var(--logo-transition-speed) ease, transform var(--logo-transition-speed) ease;
+  background-color: transparent;
+}
+
+.logo-container.hidden {
+  opacity: 0;
+  transform: translateY(-20px);
+}
+
+.logo-container img {
+  width: 100px;
+  height: auto;
+  margin-right: 15px;
+  transition: transform 0.3s ease;
+}
+
+.logo-container img:hover {
+  transform: scale(1.05);
+}
+
+.logo-text {
+  display: flex;
+  flex-direction: column;
+}
+
+.logo-text1 {
+  font-family: 'Merriweather', serif;
+  font-size: 1.8rem;
+  font-weight: 700;
+  color: var(--logo-text-color1);
+  margin-bottom: 5px;
+  text-shadow: var(--logo-text-shadow);
+  -webkit-text-stroke: 0.5px rgba(255, 255, 255, 0.7);
+          text-stroke: 0.5px rgba(255, 255, 255, 0.7);
+}
+
+.logo-text2 {
+  font-size: 1.4rem;
+  font-weight: bold;
+  color: var(--logo-text-color2);
+  text-shadow: var(--logo-text-shadow);
+  -webkit-text-stroke: 0.5px rgba(255, 255, 255, 0.7);
+          text-stroke: 0.5px rgba(255, 255, 255, 0.7);
+}
+
+@media (max-width: 500px) {
+  .logo-container {
+    top: 5px;
+    left: 5px;
+    padding: 8px;
+  }
+
+  .logo-container img {
+    width: 80px;
+    margin-right: 10px;
+  }
+
+  .logo-text1 {
+    font-size: 1.5rem;
+  }
+
+  .logo-text2 {
+    font-size: 1.2rem;
+  }
+
+  .container {
+    margin-top: 150px;
+  }
+}
+
+@media (max-width: 400px) {
+  .logo-container {
+    flex-d

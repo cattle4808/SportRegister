@@ -8,6 +8,40 @@
   <link rel="stylesheet" href="{% static 'frontend/css/styles.css' %}">
 </head>
 <body>
+
+<!--<link href="https://fonts.googleapis.com/css2?family=Merriweather&display=swap" rel="stylesheet">-->
+
+<div class="logo-container" id="logoContainer">
+  <img src="https://i.imgur.com/EK6tzlA.png" alt="Логотип Toshkent tibbiyot akademiyasi">
+  <div class="logo-text">
+    <span class="logo-text1">Toshkent tibbiyot akademiyasi</span>
+    <span class="logo-text2">"Shifokor" sport klubi</span>
+  </div>
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      const logoContainer = document.getElementById('logoContainer');
+      const fadeStart = 25; // Начало эффекта (в пикселях)
+      const fadeUntil = 75; // Конец эффекта (в пикселях)
+
+      window.addEventListener('scroll', function() {
+        const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+
+        if (scrollTop > fadeStart) {
+          let opacity = 1 - (scrollTop - fadeStart) / (fadeUntil - fadeStart);
+          if (opacity < 0) opacity = 0;
+          logoContainer.style.opacity = opacity;
+
+          logoContainer.style.transform = `translateY(-${20 * (1 - opacity)}px)`;
+        } else {
+          logoContainer.style.opacity = 1;
+          logoContainer.style.transform = 'translateY(0)';
+        }
+      });
+    });
+  </script>
+</div>
+
+
   <div class="container">
     <div class="thank-you">
       <h2>Ro'yxatdan o'tganingiz uchun rahmat!</h2>
