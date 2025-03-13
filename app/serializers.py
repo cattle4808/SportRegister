@@ -1,6 +1,6 @@
 from rest_framework import serializers
 
-from .models import Student, Sport, Faculty, RegularPerson
+from .models import Student, Sport, Faculty, RegularPerson, AcademyPerson
 
 
 class SportSerializer(serializers.ModelSerializer):
@@ -61,8 +61,32 @@ class RegularPersonPOST(serializers.ModelSerializer):
         model = RegularPerson
         exclude = ('date',)
 
+
+class AcademyPersonGET(serializers.ModelSerializer):
+    sports = serializers.SlugRelatedField(
+        slug_field='name',
+        read_only=True,
+        many=True
+    )
+
+    class Meta:
+        model = AcademyPerson
+        exclude = ('date',)
+
+class AcademyPersonPOST(serializers.ModelSerializer):
+    session_id = serializers.UUIDField(read_only=True)
+    sports = serializers.PrimaryKeyRelatedField(
+        queryset=Sport.objects.all(),
+        many=True
+    )
+
+    class Meta:
+        model = AcademyPerson
+        exclude = ('date',)
+
 class SessionInfoSerializer(serializers.Serializer):
     students = StudentSerializerGET(many=True)
     regular_persons = RegularPersonGET(many=True)
+    academy_persons = AcademyPersonGET(many=True)
 
 

@@ -108,3 +108,23 @@ class RegularPerson(Person):
         db_table = "regular_persons_table"
         verbose_name = "Oddiy foydalanuvchi"
         verbose_name_plural = "Oddiy foydalanuvchilar"
+
+
+
+class AcademyPerson(Person):
+    job = models.CharField(
+        max_length=255,
+        verbose_name="Ish joyi"
+    )
+    position = models.CharField(
+        max_length=255,
+        verbose_name="Lavozimi"
+    )
+
+    def __str__(self):
+        return f"{self.name1} {self.name2}"
+
+    class Meta:
+        db_table = "academy_persons_table"
+        verbose_name = "Akademik foydalanuvchi"
+        verbose_name_plural = "Akademik foydalanuvchilar"

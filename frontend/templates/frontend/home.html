@@ -7,7 +7,6 @@
   {% load static %}
   <link rel="stylesheet" href="{% static 'frontend/css/styles.css' %}">
 </head>
-<!--<link href="https://fonts.googleapis.com/css2?family=Merriweather&display=swap" rel="stylesheet">-->
 
 <div class="logo-container" id="logoContainer">
   <img src="https://i.imgur.com/EK6tzlA.png" alt="Логотип Toshkent tibbiyot akademiyasi">
@@ -18,19 +17,16 @@
   <script>
     document.addEventListener('DOMContentLoaded', function() {
       const logoContainer = document.getElementById('logoContainer');
-      const fadeStart = 25; // Начало эффекта (в пикселях)
-      const fadeUntil = 75; // Конец эффекта (в пикселях)
+      const fadeStart = 25;
+      const fadeUntil = 75;
 
       window.addEventListener('scroll', function() {
         const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
 
         if (scrollTop > fadeStart) {
-          // Вычисляем степень прозрачности
           let opacity = 1 - (scrollTop - fadeStart) / (fadeUntil - fadeStart);
           if (opacity < 0) opacity = 0;
           logoContainer.style.opacity = opacity;
-
-          // Дополнительно можно сдвинуть логотип вверх для плавности
           logoContainer.style.transform = `translateY(-${20 * (1 - opacity)}px)`;
         } else {
           logoContainer.style.opacity = 1;
@@ -41,16 +37,36 @@
   </script>
 </div>
 
-  <div class="container">
-    {% if has_session %}
-      <h1>Rahmat, ma'lumotlaringiz saqlandi!</h1>
-      <p>Siz allaqachon ro'yxatdan o'tgansiz. Ma'lumotlarni o'zgartirish uchun ro'yxatdan o'tish shakliga o'tishingiz mumkin.</p>
-      <a href="{% url 'frontend:create_student' %}" class="toggle-button">Ro'yxat ma'lumotlarini tahrirlash</a>
-    {% else %}
-      <h1>Xush kelibsiz!</h1>
-      <a href="{% url 'frontend:create_student' %}" class="toggle-button">Talabani ro'yxatdan o'tkazish</a>
-      <a href="{% url 'frontend:regular_person' %}" class="toggle-button">Oddiy foydalanuvchini ro'yxatdan o'tkazish</a>
-    {% endif %}
-  </div>
+<div class="container">
+  {% if has_session %}
+    <h1>Rahmat, ma'lumotlaringiz saqlandi!</h1>
+    <p>Siz allaqachon ro'yxatdan o'tgansiz. Ma'lumotlarni o'zgartirish uchun ro'yxatdan o'tish shakliga o'tishingiz mumkin.</p>
+    <a id="edit-link" href="#" class="toggle-button">Ro'yxat ma'lumotlarini tahrirlash</a>
+  {% else %}
+    <h1>Xush kelibsiz!</h1>
+    <a href="{% url 'frontend:create_student' %}" class="toggle-button">Talabani ro'yxatdan o'tkazish</a>
+    <a href="{% url 'frontend:regular_person' %}" class="toggle-button">Oddiy foydalanuvchini ro'yxatdan o'tkazish</a>
+    <a href="{% url 'frontend:academy_person' %}" class="toggle-button">Akademik foydalanuvchini ro'yxatdan o'tkazish</a>
+  {% endif %}
+</div>
+
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    const editLink = document.getElementById('edit-link');
+
+    if (editLink) {
+      if (localStorage.getItem('student_session_id')) {
+        editLink.href = "{% url 'frontend:create_student' %}";
+      } else if (localStorage.getItem('regular_person_session_id')) {
+        editLink.href = "{% url 'frontend:regular_person' %}";
+      } else if (localStorage.getItem('academic_person_session_id')) {
+        editLink.href = "{% url 'frontend:academy_person' %}";
+      } else {
+        editLink.style.display = "none";
+      }
+    }
+  });
+</script>
+
 </body>
 </html>

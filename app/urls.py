@@ -5,6 +5,7 @@ from .views import (
     StudentFormListAPIView,
     RegularPersonFormListAPIView,
     SessionInfoView,
+    AcademyPersonFormListAPIView
 )
 
 urlpatterns = [
@@ -12,5 +13,6 @@ urlpatterns = [
     path('v1/faculties/', FacultyListCreateAPIView.as_view(), name='faculty-list-create'),
     path('v1/students/', StudentFormListAPIView.as_view(), name='student-list-create'),
     path('v1/regular_persons/', RegularPersonFormListAPIView.as_view(), name='regular-person-list-create'),
+    path('v1/academic_person/', AcademyPersonFormListAPIView.as_view(), name='academy-person-list-create'),
     path('v1/session-info/', SessionInfoView.as_view(), name='session-info'),
 ]

@@ -25,6 +25,14 @@ class RegularPersonView(View):
             'sports': sports,
         })
 
+class AcademyPersonView(View):
+    def get(self, request):
+        sports = Sport.objects.all()
+        return render(request, 'frontend/academy_person.html', {
+            'sports': sports,
+        })
+
+
 class ThankYouView(View):
     def get(self, request):
         return render(request, 'frontend/thank_you.html')

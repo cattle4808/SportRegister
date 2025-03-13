@@ -7,7 +7,7 @@ from rest_framework.permissions import IsAdminUser, AllowAny
 from rest_framework.response import Response
 from rest_framework.views import APIView
 
-from .models import Sport, Faculty, Student, RegularPerson
+from .models import Sport, Faculty, Student, RegularPerson, AcademyPerson
 from .serializers import (
     SportSerializer,
     FacultySerializer,
@@ -15,18 +15,13 @@ from .serializers import (
     StudentSerializerPOST,
     RegularPersonGET,
     RegularPersonPOST,
-    SessionInfoSerializer
+    SessionInfoSerializer,
+    AcademyPersonPOST,
+    AcademyPersonGET
 )
 
 
 class SportListCreateAPIView(ListCreateAPIView):
-    """
-    Представление для создания и просмотра списка видов спорта (Sport).
-
-    Доступно только администраторам:
-    - GET /sports/ — получить список всех видов спорта (с фильтрацией и поиском).
-    - POST /sports/ — добавить новый вид спорта.
-    """
     queryset = Sport.objects.all()
     serializer_class = SportSerializer
     filter_backends = [DjangoFilterBackend, SearchFilter]
@@ -40,13 +35,6 @@ class SportListCreateAPIView(ListCreateAPIView):
 
 
 class FacultyListCreateAPIView(ListCreateAPIView):
-    """
-    Представление для создания и просмотра списка факультетов (Faculty).
-
-    Доступно только администраторам:
-    - GET /faculties/ — получить список всех факультетов (с фильтрацией и поиском).
-    - POST /faculties/ — добавить новый факультет.
-    """
     queryset = Faculty.objects.all()
     serializer_class = FacultySerializer
     filter_backends = [DjangoFilterBackend, SearchFilter]
@@ -188,6 +176,43 @@ class RegularPersonFormListAPIView(ListCreateAPIView):
         )
 
 
+
+class AcademyPersonFormListAPIView(ListCreateAPIView):
+    queryset = AcademyPerson.objects.all()
+
+    def get_serializer_class(self):
+        if self.request.method == "GET":
+            return AcademyPersonGET
+        return AcademyPersonPOST
+
+    def get_queryset(self):
+        if self.request.user.is_staff:
+            return AcademyPerson.objects.all()
+
+        session_id = self.request.session.get('session_id')
+        if not session_id:
+            return AcademyPerson.objects.none()
+        return AcademyPerson.objects.filter(session_id=session_id)
+
+    def create(self, request, *args, **kwargs):
+        session_id = request.session.get("session_id")
+        if not session_id:
+            session_id = str(uuid.uuid4())
+            request.session["session_id"] = session_id
+
+        data = request.data.copy()
+        data["session_id"] = session_id
+
+        serializer = self.get_serializer(data=data)
+        serializer.is_valid(raise_exception=True)
+        regular_person = serializer.save()
+
+        return Response(
+            AcademyPersonGET(regular_person).data,
+            status=status.HTTP_201_CREATED
+        )
+
+
 class SessionInfoView(APIView):
     def get(self, request, format=None):
         session_id = request.GET.get("session_id")
@@ -212,11 +237,13 @@ class SessionInfoView(APIView):
 
         student = Student.objects.filter(session_id=session_uuid)
         regular_person = RegularPerson.objects.filter(session_id=session_uuid)
+        academy_person = AcademyPerson.objects.filter(session_id=session_uuid)
 
         session_serializer = SessionInfoSerializer(
             {
                 "students": student,
-                "regular_persons": regular_person
+                "regular_persons": regular_person,
+                "academy_persons": academy_person
             }
         )
 
@@ -224,5 +251,6 @@ class SessionInfoView(APIView):
             session_serializer.data,
             status=status.HTTP_200_OK
         )
+
 
 
