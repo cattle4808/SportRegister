@@ -50,7 +50,6 @@
       {% csrf_token %}
       <h2>Akademik xodimni ro'yxatdan o'tkazish</h2>
 
-      <!-- Имя -->
       <div class="input-group">
         <label for="name1_academic">Ism (kamida 3 belgi):</label>
         <input
@@ -63,7 +62,6 @@
         <span class="error-message"></span>
       </div>
 
-      <!-- Фамилия -->
       <div class="input-group">
         <label for="name2_academic">Familya (kamida 3 belgi):</label>
         <input
@@ -76,7 +74,6 @@
         <span class="error-message"></span>
       </div>
 
-      <!-- Отчество (необязательно) -->
       <div class="input-group">
         <label for="name3_academic">Otasining ismi (ixtiyoriy):</label>
         <input
@@ -88,7 +85,6 @@
         <span class="error-message"></span>
       </div>
 
-      <!-- Дата рождения -->
       <div class="input-group">
         <label for="age_academic">Tug'ilgan sana:</label>
         <input
@@ -100,7 +96,6 @@
         <span class="error-message"></span>
       </div>
 
-      <!-- Спортивные кружки -->
       <fieldset>
         <legend>Sport turlari:</legend>
         <div class="input-group" id="sports-container-academic">
@@ -119,7 +114,6 @@
         <span class="error-message"></span>
       </fieldset>
 
-      <!-- Телефон -->
       <div class="input-group">
         <label for="phone_academic">Telefon raqam:</label>
         <input
@@ -132,7 +126,6 @@
         <span class="error-message"></span>
       </div>
 
-      <!-- Telegram -->
       <div class="input-group">
         <label for="telegram_academic">Telegram:</label>
         <input
@@ -145,7 +138,6 @@
         <span class="error-message"></span>
       </div>
 
-      <!-- Место работы (job) -->
       <div class="input-group">
         <label for="job_academic">Ish joyi:</label>
         <input
@@ -158,7 +150,6 @@
         <span class="error-message"></span>
       </div>
 
-      <!-- Должность (position) -->
       <div class="input-group">
         <label for="position_academic">Lavozim:</label>
         <input
@@ -171,7 +162,6 @@
         <span class="error-message"></span>
       </div>
 
-      <!-- Фото -->
       <div class="input-group">
         <label for="photo_academic">Rasm (ixtiyoriy):</label>
         <input
@@ -193,7 +183,6 @@
     </form>
   </div>
 
-  <!-- Ссылки-переключатели на другие формы -->
   <a href="{% url 'frontend:create_student' %}" class="toggle-button">Talaba shakli</a>
   <a href="{% url 'frontend:regular_person' %}" class="toggle-button">Oddiy foydalanuvchi shakli</a>
 </div>
